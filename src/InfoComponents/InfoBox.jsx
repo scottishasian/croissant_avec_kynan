@@ -1,12 +1,23 @@
 import React from 'react';
 import CountrySelector from './CountrySelector.jsx';
+import CountryDetails from './CountryDetails.jsx';
+import WeatherBox from '../WeatherComponents/WeatherBox.jsx';
 
 class InfoBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countries: []
+      countries: [],
+      focusCountry: null
     }
+
+    this.setFocusCountry = this.setFocusCountry.bind(this);
+  }
+
+  setFocusCountry(country) {
+    this.setState({
+      focusCountry: country
+    })
   }
 
   componentDidMount() {
@@ -20,7 +31,7 @@ class InfoBox extends React.Component {
       if(request.status !== 200) return;
       const jsonString = request.responseText;
       const countries = JSON.parse(jsonString);
-      this.setState({countries: countries});
+      this.setState({countries: countries, focusCountry: countries[0]});
       console.log(this.state.countries);
     })
   }
@@ -29,7 +40,11 @@ class InfoBox extends React.Component {
     return (
       <div className='info-box'>
         <h1>Countries</h1>
-        <CountrySelector />
+        <CountrySelector
+          countries={this.state.countries}
+          setFocusCountry={this.setFocusCountry}/>
+        <CountryDetails country={this.state.focusCountry}/>
+        <WeatherBox country={this.state.focusCountry} />
       </div>
     )
   }

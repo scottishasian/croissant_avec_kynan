@@ -12,3 +12,9 @@ body {
   display: block;
   width: 500px;
 }
+
+.country-info img {
+  max-width: 50%;
+  max-height: 50%;
+  border-style: groove;
+}
