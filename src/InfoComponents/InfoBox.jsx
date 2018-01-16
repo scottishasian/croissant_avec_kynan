@@ -1,17 +1,17 @@
 import React from 'react';
-import RecipeSelector from './RecipeSelector.jsx';
+import CountrySelector from './CountrySelector.jsx';
 
 class InfoBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipies: []
+      countries: []
     }
   }
 
   componentDidMount() {
     console.log('mounted');
-    const url = 'https://api.edamam.com/search'
+    const url = 'https://restcountries.eu/rest/v2/all'
     const request = new XMLHttpRequest();
     request.open('GET', url);
     request.send();
@@ -19,17 +19,17 @@ class InfoBox extends React.Component {
     request.addEventListener('load', () => {
       if(request.status !== 200) return;
       const jsonString = request.responseText;
-      const recipes = JSON.parse(jsonString);
-      this.setState({recipies: recipes});
-      console.log(this.state.recipes);
+      const countries = JSON.parse(jsonString);
+      this.setState({countries: countries});
+      console.log(this.state.countries);
     })
   }
 
   render() {
     return (
       <div className='info-box'>
-        <h1>Recipes</h1>
-        <RecipeSelector />
+        <h1>Countries</h1>
+        <CountrySelector />
       </div>
     )
   }

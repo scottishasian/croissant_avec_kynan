@@ -1,6 +1,6 @@
 import React from 'react';
 
-class RecipeSelector extends React.Component {
+class CountrySelector extends React.Component {
 
   render() {
     return (
@@ -9,4 +9,4 @@ class RecipeSelector extends React.Component {
   }
 }
 
-export default RecipeSelector;
+export default CountrySelector;
